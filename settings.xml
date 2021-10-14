@@ -1,0 +1,9 @@
+<mirrors>
+    <mirror>
+        <id>alimaven</id>
+        <name>aliyun maven</name>
+        <!-- https://maven.aliyun.com/repository/public/ -->
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        <mirrorOf>central</mirrorOf>
+    </mirror>
+</mirrors>

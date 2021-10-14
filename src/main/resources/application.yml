@@ -1,0 +1,12 @@
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-2ze87n9gd72aqdpco5o.mysql.rds.aliyuncs.com:3306/good_community
+    username: root
+    password: Wangjy0424
+server:
+  port: 8080
+  servlet:
+    context-path: /api
