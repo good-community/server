@@ -4,6 +4,7 @@ import com.bupt.constant.RetCodeEnum;
 import com.bupt.model.vo.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,7 +22,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AuthenticationException.class)
     public Response handleAuthenticationException(AuthenticationException e) {
         log.warn("login error, {}", e.getMessage());
-        return Response.err(e.getMessage());
+        return Response.any(RetCodeEnum.NOT_LOGIN, e.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public Response handleUnauthorizedException(UnauthorizedException e) {
+        log.warn("not role, {}", e.getMessage());
+        return Response.any(RetCodeEnum.NOT_ROLE, e.getMessage());
     }
 
     /**

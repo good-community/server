@@ -49,6 +49,13 @@ public class User implements Serializable {
      */
     @TableField(value = "avatar_url")
     private String avatarUrl;
+
+    /**
+     * 角色
+     */
+    @TableField("role")
+    private Integer role;
+
     /**
      * 状态：1正常，0注销
      */

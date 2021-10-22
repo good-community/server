@@ -1,5 +1,6 @@
 package com.bupt.model.dto;
 
+import com.bupt.service.UserService;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -14,6 +15,6 @@ public class UserAuthDTO {
     @Length(min = 3, max = 20)
     private String username;
     @NotBlank
-    @Length(min = 3, max = 20)
+    @Length(min = UserService.PSW_MIN_LEN, max = 20)
     private String password;
 }

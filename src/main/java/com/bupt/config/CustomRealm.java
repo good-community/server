@@ -1,5 +1,6 @@
 package com.bupt.config;
 
+import com.bupt.constant.UserRoleEnum;
 import com.bupt.model.po.User;
 import com.bupt.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +29,10 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Set<String> stringSet = new HashSet<>();
-        stringSet.add("user:show");
-        stringSet.add("user:admin");
-        info.setStringPermissions(stringSet);
+        Set<String> roleSet = new HashSet<>();
+        UserRoleEnum roleEnum = userService.getRoleByName(username);
+        roleSet.add(roleEnum.name);
+        info.setRoles(roleSet);
         return info;
     }
 
