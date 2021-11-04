@@ -60,7 +60,7 @@ public class User implements Serializable {
      * 状态：1正常，0注销
      */
     @TableField(value = "status")
-    private Byte status;
+    private Long status;
     /**
      * 创建时间
      */

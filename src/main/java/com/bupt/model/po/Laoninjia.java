@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import org.apache.ibatis.type.JdbcType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -45,8 +46,8 @@ public class Laoninjia implements Serializable {
     private Date EndDate;
 
     /*请求介绍照片,blob字段存储*/
-    @TableField(value = "image")
-    private byte[] image;
+    @TableField(value = "base64_image")
+    private String  Base64Image;
 
     /*创建时间*/
     @TableField(value = "begin_date")

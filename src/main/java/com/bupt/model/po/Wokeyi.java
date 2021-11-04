@@ -44,6 +44,6 @@ public class Wokeyi implements Serializable {
 
     /*状态0：待接受；1：同意；2：拒绝；3：取消*/
     @TableField(value = "status")
-    private int status;
+    private Long status;
 
 }
