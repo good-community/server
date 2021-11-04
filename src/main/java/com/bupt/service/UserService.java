@@ -24,4 +24,5 @@ public interface UserService extends IService<User> {
     UserInfoVO loginUser();
     Long loginId();
     boolean isLoginUser(Long userId);
+
 }

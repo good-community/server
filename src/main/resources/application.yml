@@ -6,7 +6,20 @@ spring:
     url: jdbc:mysql://rm-2ze87n9gd72aqdpco5o.mysql.rds.aliyuncs.com:3306/good_community
     username: root
     password: Wangjy0424
+
+actable:
+  table:
+    auto: update
+  model:
+    pack: com.bupt.model.po
+  database:
+    type: mysql
+
+mybatis-plus:
+  mapper-locations: classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
+
 server:
   port: 8080
   servlet:
     context-path: /api
+
