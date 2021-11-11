@@ -33,6 +33,7 @@ public class Laoninjia implements Serializable {
     @TableField(value = "subject")
     private String subject;
 
+
     /*请求描述*/
     @TableField(value = "content")
     private String content;

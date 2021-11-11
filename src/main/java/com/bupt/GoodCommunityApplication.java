@@ -7,8 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan("com.bupt.mapper")
-@MapperScan("com.gitee.sunchenbin.mybatis.actable.dao.*")
-@ComponentScan(basePackages = {"com.gitee.sunchenbin.mybatis.actable.manager.*"})
 public class GoodCommunityApplication {
 
     public static void main(String[] args) {
