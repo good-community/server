@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bupt.config.ShiroConfig;
 import com.bupt.constant.UserRoleEnum;
 import com.bupt.mapper.UserMapper;
-import com.bupt.model.dto.UserAuthDTO;
 import com.bupt.model.dto.UserInfoDTO;
+import com.bupt.model.dto.UserRegisterDTO;
 import com.bupt.model.po.User;
 import com.bupt.model.vo.UserInfoVO;
 import com.bupt.service.UserService;
@@ -18,6 +18,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 /**
  *
@@ -49,22 +50,55 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 .one();
     }
 
+    /**
+     * 若最近一个月内该身份证号被注册过其他城市，则返回true
+     */
+    private boolean isIdNoRepeat(UserRegisterDTO dto) {
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.add(Calendar.MONTH, -1);
+        return this.lambdaQuery()
+                .eq(User::getIdNo, dto.getIdNo())
+                .ne(User::getCity, dto.getCity())
+                .gt(User::getCreateTime, rightNow.getTime())
+                .one() != null;
+    }
+
     @Override
-    public void register(UserAuthDTO dto) {
+    public void register(UserRegisterDTO dto) {
         String username = dto.getUsername();
         String password = dto.getPassword();
-        User user = this.getByUserName(username);
+        String idNo = dto.getIdNo();
+        String city = dto.getCity();
+        Integer communityType = dto.getCommunityType();
+
+        //校验是否可以注册
+        checkRegister(dto);
+
+        //保存
+        User user = new User();
+        user.setUsername(username);
+        user.setCity(city);
+        user.setIdNo(idNo);
+        user.setCommunityType(communityType);
+        //将用户名作为加密盐值
+        String hashedPassword = this.getHashedPassword(username, password);
+        user.setPassword(hashedPassword);
+
+        super.save(user);
+        log.info("user register success, {}", dto);
+    }
+
+    private void checkRegister(UserRegisterDTO dto) {
+        //用户名判重
+        User user = this.getByUserName(dto.getUsername());
         if (user != null) {
             throw new RuntimeException("用户名已存在");
         }
 
-        //将用户名作为加密盐值
-        user = new User();
-        user.setUsername(username);
-        String hashedPassword = this.getHashedPassword(username, password);
-        user.setPassword(hashedPassword);
-        super.save(user);
-        log.info("user register success, {}", dto);
+        //身份证号判重
+        if(isIdNoRepeat(dto)){
+            throw new RuntimeException("该身份证号在一个月内被注册过其他城市");
+        }
     }
 
     @Override

@@ -24,31 +24,51 @@ public class User implements Serializable {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
+
     /**
      * 用户名
      */
     @TableField(value = "username")
     private String username;
+
     /**
      * 密码（加密）
      */
     @TableField(value = "password")
     private String password;
+
     /**
      * 联系方式
      */
     @TableField(value = "contact")
     private String contact;
+
+    /**
+     * 身份证号
+     */
+    @TableField(value = "id_no")
+    private String idNo;
+
+    /**
+     * 注册城市
+     */
+    @TableField(value = "city")
+    private String city;
+
     /**
      * 个人简介
      */
     @TableField(value = "introduction")
     private String introduction;
+
     /**
      * 用户头像url
      */
     @TableField(value = "avatar_url")
     private String avatarUrl;
+
+    @TableField(value = "community_type")
+    private Integer communityType;
 
     /**
      * 角色
@@ -61,11 +81,13 @@ public class User implements Serializable {
      */
     @TableField(value = "status")
     private Long status;
+
     /**
      * 创建时间
      */
     @TableField(value = "create_time")
     private Date createTime;
+
     /**
      * 创建时间
      */

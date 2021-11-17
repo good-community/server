@@ -2,9 +2,9 @@ package com.bupt.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bupt.constant.RetCodeEnum;
-import com.bupt.constant.UserRoleEnum;
-import com.bupt.model.dto.UserAuthDTO;
+import com.bupt.model.dto.UserLoginDTO;
 import com.bupt.model.dto.UserInfoDTO;
+import com.bupt.model.dto.UserRegisterDTO;
 import com.bupt.model.vo.Response;
 import com.bupt.model.vo.UserInfoVO;
 import com.bupt.service.UserService;
@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    public Response login(@RequestBody @Valid UserAuthDTO dto) {
+    public Response login(@RequestBody @Valid UserLoginDTO dto) {
         // 从SecurityUtils里边创建一个 subject
         Subject subject = SecurityUtils.getSubject();
         // 在认证提交前准备 token（令牌）
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Response register(@RequestBody @Valid UserAuthDTO dto) {
+    public Response register(@RequestBody @Valid UserRegisterDTO dto) {
         userService.register(dto);
         return Response.ok();
     }
