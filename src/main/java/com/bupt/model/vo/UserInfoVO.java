@@ -2,7 +2,11 @@ package com.bupt.model.vo;
 
 import com.bupt.constant.CommunityType;
 import com.bupt.model.po.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Data
 public class UserInfoVO {
@@ -43,6 +47,12 @@ public class UserInfoVO {
      */
     private String communityType;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+
     /**
      * PO转VO
      *
@@ -57,5 +67,7 @@ public class UserInfoVO {
         this.introduction = user.getIntroduction();
         this.avatarUrl = user.getAvatarUrl();
         this.communityType = CommunityType.getName(user.getCommunityType());
+        this.createTime = user.getCreateTime();
+        this.updateTime = user.getUpdateTime();
     }
 }

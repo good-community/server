@@ -37,7 +37,8 @@ public class UserController {
         } catch (IncorrectCredentialsException e) {
             return Response.fail("用户名或密码错误");
         }
-        return Response.ok();
+        UserInfoVO vo = userService.getInfo(dto.getUsername());
+        return Response.ok(vo);
     }
 
     @PostMapping("/register")

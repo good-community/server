@@ -17,6 +17,7 @@ public interface UserService extends IService<User> {
     User getByUserName(String username);
     void register(UserRegisterDTO dto);
     UserInfoVO getInfo(Long userId);
+    UserInfoVO getInfo(String username);
     void updateInfo(UserInfoDTO dto);
     UserRoleEnum getRoleByName(String username);
     Page<UserInfoVO> pageAllInfo();

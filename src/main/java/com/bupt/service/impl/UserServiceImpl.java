@@ -1,5 +1,6 @@
 package com.bupt.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -110,6 +111,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         return new UserInfoVO(user);
     }
+    @Override
+    public UserInfoVO getInfo(String username) {
+        User user = lambdaQuery().eq(User::getUsername, username)
+                .one();
+        if (user == null) {
+            throw new RuntimeException("user not exist, username = " + username);
+        }
+        return new UserInfoVO(user);
+    }
 
     @Override
     public void updateInfo(UserInfoDTO dto) {
@@ -121,7 +131,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         //密码
         String password = dto.getPassword();
-        if (password != null) {
+        if (StringUtils.isNotBlank(password)) {
             if (password.length() < PSW_MIN_LEN) {
                 throw new RuntimeException("密码长度过短：" + password.length());
             }

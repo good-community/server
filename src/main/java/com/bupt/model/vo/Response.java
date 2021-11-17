@@ -17,14 +17,14 @@ public class Response {
     private Object data;
 
     public Response(RetCodeEnum retCodeEnum, Object data) {
-        this.code = retCodeEnum.getCode();
-        this.msg = retCodeEnum.getMsg();
+        this.code = retCodeEnum.code;
+        this.msg = retCodeEnum.msg;
         this.data = data;
     }
 
     public Response(RetCodeEnum retCodeEnum) {
-        this.code = retCodeEnum.getCode();
-        this.msg = retCodeEnum.getMsg();
+        this.code = retCodeEnum.code;
+        this.msg = retCodeEnum.msg;
     }
 
     public static Response ok() {
@@ -44,15 +44,15 @@ public class Response {
     }
 
     public static Response err(String msg, Object errDetail) {
-        return new Response(RetCodeEnum.ERROR.getCode(), msg, errDetail);
+        return new Response(RetCodeEnum.ERROR.code, msg, errDetail);
     }
 
-    public static Response fail(Object failReason) {
-        return new Response(RetCodeEnum.FAIL, failReason);
+    public static Response fail(String msg) {
+        return new Response(RetCodeEnum.FAIL.code, msg, null);
     }
 
     public static Response err(Exception e) {
-        return new Response(RetCodeEnum.ERROR.getCode(), e.getMessage(), Arrays.stream(e.getStackTrace()).limit(3));
+        return new Response(RetCodeEnum.ERROR.code, e.getMessage(), Arrays.stream(e.getStackTrace()).limit(3));
     }
 
     public static Response any(RetCodeEnum codeEnum) {
