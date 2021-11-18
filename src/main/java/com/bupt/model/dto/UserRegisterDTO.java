@@ -24,9 +24,8 @@ public class UserRegisterDTO {
     @Length(min = 18, max = 18)
     private String idNo;
 
-    @NotBlank
-    @Length(min = 2, max = 20)
-    private String city;
+    @NotNull
+    private Integer city;
 
     @NotNull
     private Integer communityType;

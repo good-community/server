@@ -53,7 +53,7 @@ public class User implements Serializable {
      * 注册城市
      */
     @TableField(value = "city")
-    private String city;
+    private Integer city;
 
     /**
      * 个人简介

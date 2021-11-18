@@ -61,7 +61,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 .eq(User::getIdNo, dto.getIdNo())
                 .ne(User::getCity, dto.getCity())
                 .gt(User::getCreateTime, rightNow.getTime())
-                .one() != null;
+                .exists();
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         String username = dto.getUsername();
         String password = dto.getPassword();
         String idNo = dto.getIdNo();
-        String city = dto.getCity();
+        Integer city = dto.getCity();
         Integer communityType = dto.getCommunityType();
 
         //校验是否可以注册

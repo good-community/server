@@ -1,10 +1,11 @@
 package com.bupt.model.vo;
 
-import com.bupt.constant.CommunityType;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.bupt.constant.CityEnum;
+import com.bupt.constant.CommunityEnum;
 import com.bupt.model.po.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -62,11 +63,11 @@ public class UserInfoVO {
         this.id = user.getId();
         this.username = user.getUsername();
         this.idNo = user.getIdNo();
-        this.city = user.getCity();
+        this.city = CityEnum.getName(user.getCity());
         this.contact = user.getContact();
         this.introduction = user.getIntroduction();
         this.avatarUrl = user.getAvatarUrl();
-        this.communityType = CommunityType.getName(user.getCommunityType());
+        this.communityType = CommunityEnum.getName(user.getCommunityType());
         this.createTime = user.getCreateTime();
         this.updateTime = user.getUpdateTime();
     }
