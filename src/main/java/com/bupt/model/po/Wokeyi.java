@@ -23,11 +23,11 @@ public class Wokeyi implements Serializable {
 
     /*请求标识*/
     @TableField(value = "request_id")
-    private Long RequestId;
+    private Long requestId;
 
     /*响应用户标识*/
     @TableField(value = "user_id")
-    private Long UserId;
+    private Long userId;
 
     /*响应描述*/
     @TableField(value= "content")
@@ -36,14 +36,14 @@ public class Wokeyi implements Serializable {
 
     /*创建时间*/
     @TableField(value = "begin_date")
-    private Date BeginDate;
+    private String beginDate;
 
     /*修改时间*/
     @TableField(value = "modify_date")
-    private Date ModifyDate;
+    private String modifyDate;
 
     /*状态0：待接受；1：同意；2：拒绝；3：取消*/
     @TableField(value = "status")
-    private Long status;
+    private String status;
 
 }

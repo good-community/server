@@ -32,7 +32,7 @@ public class LaoninjiaController {
         QueryWrapper<Laoninjia> tmp=new QueryWrapper<>();
         tmp.eq("user_id",id);
 
-        return Response.ok(laoninjia.getOne(tmp));
+        return Response.ok(laoninjia.list(tmp));
 
     }
 

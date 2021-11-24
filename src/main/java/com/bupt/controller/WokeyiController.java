@@ -19,7 +19,9 @@ public class WokeyiController {
 
     @PostMapping("/publish")//提交新的响应信息
     public Response publish(@RequestBody Wokeyi entity){
-
+         System.out.println("lalala");
+        System.out.println("id:!!!"+entity.getUserId());
+        System.out.println("date:!!!"+entity.getBeginDate());
         wokeyiService.saveOrUpdate(entity);
         return Response.ok();
 

@@ -44,21 +44,21 @@ public class Laoninjia implements Serializable {
 
     /*请求结束日期*/
     @TableField(value = "end_date")
-    private Date EndDate;
+    private String endDate;
 
     /*请求介绍照片,blob字段存储*/
     @TableField(value = "base64_image")
-    private String  Base64Image;
+    private String  base64Image;
 
     /*创建时间*/
     @TableField(value = "begin_date")
-    private Date BeginDate;
+    private String beginDate;
 
     /*修改时间*/
     @TableField(value = "modify_date")
-    private String ModifyDate;
+    private String modifyDate;
 
-    /*状态 complete wait cancel fail*/
+    /*状态 complete wait cancel fail 已完成、待响应、已取消、到期未达成*/
     @TableField(value = "status")
     private String status;
 

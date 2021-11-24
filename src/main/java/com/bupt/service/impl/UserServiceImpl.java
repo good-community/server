@@ -62,6 +62,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 .ne(User::getCity, dto.getCity())
                 .gt(User::getCreateTime, rightNow.getTime())
                 .exists();
+
     }
 
     @Override
@@ -74,7 +75,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         //校验是否可以注册
         checkRegister(dto);
-
         //保存
         User user = new User();
         user.setUsername(username);
