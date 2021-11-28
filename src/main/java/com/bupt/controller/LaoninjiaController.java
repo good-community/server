@@ -27,7 +27,7 @@ public class LaoninjiaController {
     }
 
     @PostMapping("/query_user")//某用户请求信息
-    public Response query_user(String id){
+    public Response query_user(@RequestParam("userId") String id){
 
         QueryWrapper<Laoninjia> tmp=new QueryWrapper<>();
         tmp.eq("user_id",id);
@@ -77,7 +77,7 @@ public class LaoninjiaController {
     @PostMapping("/delete")//删除
     public Response delete(@RequestBody Laoninjia entity){
 
-        laoninjia.removeById(entity);
+        laoninjia.removeById(entity.getId());
         return Response.ok();
 
     }
