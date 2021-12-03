@@ -9,6 +9,9 @@ import com.bupt.service.LaoninjiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -19,42 +22,54 @@ public class LaoninjiaController {
     LaoninjiaService laoninjia;
 
     @PostMapping("/query_all")//显示所有请求帮忙信息
-    public Response query_all(){
+    public Response query_all() throws Exception{
 
-        List<Laoninjia> a=laoninjia.list();
-        return Response.ok(a);
+        List<Laoninjia> list=laoninjia.list();
+        Date date=new Date();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy/MM/dd");
+        String now=format.format(date);
+
+        for(int i=0;i<list.size();i++)
+        {
+
+            Laoninjia cur=list.get(i);
+            if(format.parse(cur.getEndDate()).compareTo(format.parse(now))<0)
+            {
+                if(!cur.getStatus().equals("已完成")){cur.setStatus("到期未达成");
+                    laoninjia.updateById(cur);}
+            }
+            if(cur.getStatus().equals("已完成")||cur.getStatus().equals("到期未完成"))list.remove(i);
+        }
+        return Response.ok(list);
 
     }
 
     @PostMapping("/query_user")//某用户请求信息
-    public Response query_user(@RequestParam("userId") String id){
+    public Response query_user(@RequestParam("userId") String id) throws Exception{
 
         QueryWrapper<Laoninjia> tmp=new QueryWrapper<>();
         tmp.eq("user_id",id);
+        List<Laoninjia> list=laoninjia.list(tmp);
+        Date date=new Date();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy/MM/dd");
+        String now=format.format(date);
 
-        return Response.ok(laoninjia.list(tmp));
+        for(int i=0;i<list.size();i++)
+        {
+
+         Laoninjia cur=list.get(i);
+         if(format.parse(cur.getEndDate()).compareTo(format.parse(now))<0)
+         {
+             if(!cur.getStatus().equals("已完成")){cur.setStatus("到期未达成");
+             laoninjia.updateById(cur);}
+         }
+        }
+
+        return Response.ok(list);
 
     }
 
 
-    @PostMapping("/search_subject")    //主题名称模糊搜索
-    public Response search(String content)
-    {
-
-        QueryWrapper<Laoninjia> tmp=new QueryWrapper<>();
-        tmp.like("subject",content);
-        return Response.ok(laoninjia.list(tmp));
-    }
-
-
-    @PostMapping("/search_kind")    //帮忙类型搜索
-    public Response search2(String content)
-    {
-
-        QueryWrapper<Laoninjia> tmp=new QueryWrapper<>();
-        tmp.like("kind",content);
-        return Response.ok(laoninjia.list(tmp));
-    }
 
 
 
