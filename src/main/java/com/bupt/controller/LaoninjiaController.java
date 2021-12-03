@@ -35,7 +35,7 @@ public class LaoninjiaController {
             Laoninjia cur=list.get(i);
             if(format.parse(cur.getEndDate()).compareTo(format.parse(now))<0)
             {
-                if(!cur.getStatus().equals("已完成")){cur.setStatus("到期未达成");
+                if(!cur.getStatus().equals("已完成")){cur.setStatus("到期未完成");
                     laoninjia.updateById(cur);}
             }
             if(cur.getStatus().equals("已完成")||cur.getStatus().equals("到期未完成"))list.remove(i);
@@ -60,7 +60,7 @@ public class LaoninjiaController {
          Laoninjia cur=list.get(i);
          if(format.parse(cur.getEndDate()).compareTo(format.parse(now))<0)
          {
-             if(!cur.getStatus().equals("已完成")){cur.setStatus("到期未达成");
+             if(!cur.getStatus().equals("已完成")){cur.setStatus("到期未完成");
              laoninjia.updateById(cur);}
          }
         }
