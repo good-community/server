@@ -11,7 +11,7 @@ import java.util.Date;
 
 @TableName(value = "record")
 @Data
-public class record {
+public class Record {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

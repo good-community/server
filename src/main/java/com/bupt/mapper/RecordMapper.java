@@ -1,8 +1,7 @@
 package com.bupt.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bupt.model.po.record;
-import com.fasterxml.jackson.databind.ser.Serializers;
+import com.bupt.model.po.Record;
 
-public interface RecordMapper extends BaseMapper<record> {
+public interface RecordMapper extends BaseMapper<Record> {
 }

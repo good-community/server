@@ -6,21 +6,17 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.bupt.model.dto.LaoWoDTO;
 import com.bupt.model.po.Laoninjia;
 import com.bupt.model.po.Wokeyi;
-import com.bupt.model.po.record;
+import com.bupt.model.po.Record;
 import com.bupt.model.vo.Response;
 import com.bupt.service.LaoninjiaService;
 import com.bupt.service.RecordService;
 import com.bupt.service.WokeyiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 @RestController
 @RequestMapping("/wokeyi")
@@ -154,7 +150,7 @@ public class WokeyiController {
         response.setStatus("同意");
         request.setStatus("已完成");
 
-        record Record=new record();
+        Record Record=new Record();
         Record.setDate(date);
         Integer num=Integer.parseInt(request.getNumbers());
         Record.setPublishFee(num.longValue()*3);
